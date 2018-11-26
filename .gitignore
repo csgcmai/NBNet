@@ -1,0 +1,13 @@
+*.pyc
+model/*
+*.mat
+src/util/mxnet_mtcnn/*
+src/util/facenet_tf/*
+src/tensorboard/*
+src/util/mxnet_mtcnn
+src/util/facenet_tf
+src/tensorboard
+output/*
+data/*
+
+

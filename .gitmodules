@@ -1,0 +1,6 @@
+[submodule "mtcnn"]
+	path = src/util/mxnet_mtcnn
+	url = https://github.com/pangyupo/mxnet_mtcnn_face_detection.git
+[submodule "facenet"]
+	path = src/util/facenet_tf
+	url = https://github.com/davidsandberg/facenet.git
