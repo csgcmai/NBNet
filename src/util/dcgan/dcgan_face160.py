@@ -1,8 +1,6 @@
 import mxnet as mx
 import numpy as np
 import matplotlib.pyplot as plt
-from sklearn.datasets import fetch_mldata
-from skimage.transform import resize
 import logging
 import cv2
 from datetime import datetime

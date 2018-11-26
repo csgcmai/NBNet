@@ -1,0 +1,9 @@
+scipy
+numpy
+mxnet
+tensorflow
+threading
+opencv
+matplotlib
+datetime
+logging
