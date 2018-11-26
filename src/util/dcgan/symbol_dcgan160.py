@@ -23,11 +23,11 @@ def make_dcgan_sym(ngf, ndf, nc, predict=False,no_bias=True, fix_gamma=True, eps
 
     ngg = ngf*4
     for i in range(2,7):
-	g = mx.sym.Deconvolution(gact, name='g%d'%i, kernel=(4,4), stride=(2,2), pad=(1,1), num_filter=ngg, no_bias=no_bias)
+        g = mx.sym.Deconvolution(gact, name='g%d'%i, kernel=(4,4), stride=(2,2), pad=(1,1), num_filter=ngg, no_bias=no_bias)
     	#gbn = BatchNorm(g, name='gbn%d'%i, fix_gamma=fix_gamma, eps=eps)
     	#gact = mx.sym.Activation(gbn, name='gact%d'%i, act_type='relu')
         gact = mx.sym.LeakyReLU(g,name='gact%d'%i, act_type='elu', slope=alpha)*scale
-	ngg /= 2
+        ngg /= 2
 	
 
     g7 = mx.sym.Convolution(gact, name='g7', kernel=(3,3), stride=(1,1), pad=(1,1), num_filter=nc, no_bias=no_bias)

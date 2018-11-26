@@ -80,7 +80,7 @@ def main(args):
     #eval_metrics.add(tpl_score)
     eval_metrics.add(pixel_mae)
 
-    for epoch in range(200):#train at most 200 epoches
+    for epoch in range(80):#train at most 200 epoches
         tic = time.time()
         num_batch = 0
 

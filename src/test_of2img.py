@@ -3,8 +3,8 @@ import numpy as np
 import cv2
 import argparse
 
-from feature_extractor import feature_extractor
-from feature_extractor import prewhiten
+from util.util import feature_extractor
+from util.util import prewhiten
 
 def main(args):
     gpuids = [int(i) for i in args.gpus.split(',')]
@@ -42,11 +42,11 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="command for face reconstruction demo")
     parser.add_argument('--gpus', type=str, default='0', help='the gpus will be used, e.g "0,1,2,3"')
-    parser.add_argument('--prefix', type=str, default='./model/vgg-percept-nbnetb',
+    parser.add_argument('--prefix', type=str, default='../model/nbnet/of2img-nbnetb-vgg',
                         help='the prefix of the model to load')
     parser.add_argument('--epoch', type=int, default=0, help='the epoch number to load')
     parser.add_argument('--batch-size', type=int, default=1, help='the batch size')
-    parser.add_argument('--input-image', type=str, default='./data/1.jpg', help='')
-    parser.add_argument('--output-image', type=str, default='./output/1.jpg', help='')
+    parser.add_argument('--input-image', type=str, default='../data/1.jpg', help='')
+    parser.add_argument('--output-image', type=str, default='../output/1.jpg', help='')
     args = parser.parse_args()
     main(args)

@@ -1,4 +1,5 @@
 import mxnet as mx
+import numpy as np
 from util.dcgan.symbol_dcgan160 import make_dcgan_sym
 
 def add_layer(
@@ -46,18 +47,16 @@ def nb_block(
     dropout=0.,
     l2_reg=1e-4):
 
+    num_layers = np.int_(num_layers)
     if net_switch == 'nbneta':
         out = [x,]
         for i in range(num_layers):
             out.append(add_layer(out[i], growth_rate, name=name+'_layer_'+str(i), dropout=dropout, l2_reg=l2_reg))
         x = mx.symbol.concat(*out, name=name+'_concat_'+str(i))
     elif net_switch == 'nbnetb':
-        out = [x,]
-        tmp = x
         for i in range(num_layers):
-            out.append(add_layer(tmp, growth_rate, name=name+'_layer_'+str(i), dropout=dropout, l2_reg=l2_reg))
-            tmp = mx.symbol.concat(x, out[i+1], name=name+'_concat_'+str(i))
-        x = mx.symbol.concat(*out, name=name+'_concat_'+str(i))
+            out = add_layer(x, growth_rate, name=name+'_layer_'+str(i), dropout=dropout, l2_reg=l2_reg)
+            x = mx.symbol.concat(x, out, name=name+'_concat_'+str(i))
     return x
 
 def transition_block(
@@ -73,12 +72,12 @@ def transition_block(
 
 def get_symbol(
     num_block,
-    num_layer=32,
-    growth_rate=8,
+    num_layer=int(32),
+    growth_rate=int(8),
     dropout=0.,
     l2_reg=1e-4,
     net_switch='nbnetb',
-    init_channels=256,
+    init_channels=int(256),
 ):
     if net_switch == 'dcnn':
         net,_ = make_dcgan_sym(64,64,3,True)
@@ -95,7 +94,7 @@ def get_symbol(
                         dropout=dropout, l2_reg=l2_reg, net_switch=net_switch)
         n_channels /= 2
         num_layer /= 2
-        conv = transition_block(conv, n_channels, name = 'trans'+str(i)+'_', dropout=dropout, l2_reg=l2_reg)
+        conv = transition_block(conv, np.int_(n_channels), name = 'trans'+str(i)+'_', dropout=dropout, l2_reg=l2_reg)
 
     conv = nb_block(conv, num_layer, growth_rate, name = 'last_', dropout=dropout, l2_reg=l2_reg)
     conv = mx.symbol.BatchNorm(conv, eps = l2_reg, name = 'batch_norm_last')
