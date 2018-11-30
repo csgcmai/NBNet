@@ -1,3 +1,14 @@
+# Adapted from https://github.com/zhaw/neural_style/blob/master/perceptual/symbol.py
+
+"""References:
+Guangcan Mai, Kai Cao, Pong C. Yuen and Anil K. Jain. 
+"On the Reconstruction of Face Images from Deep Face Templates." 
+IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI) (2018)
+
+Simonyan, Karen, and Andrew Zisserman. "Very deep convolutional networks for
+large-scale image recognition." arXiv preprint arXiv:1409.1556 (2014).
+"""
+
 import mxnet as mx
 import numpy as np
 
@@ -13,7 +24,7 @@ def conv(data, num_filter, stride, name):
     data = mx.sym.Activation(data=data, act_type='relu')
     return data
 
-def descriptor_symbol(content_layer='relu2_2'):
+def descriptor_symbol(content_layer='relu3_2'):
     data = mx.symbol.Variable('data')
     #data = mx.symbol.UpSampling(data=data, scale=2, sample_type='nearest', workspace=1024)
     conv1_1 = mx.symbol.Convolution(name='conv1_1', data=data , num_filter=64, pad=(1,1), kernel=(3,3), stride=(1,1), no_bias=False, workspace=1024)

@@ -1,3 +1,13 @@
+"""References:
+Guangcan Mai, Kai Cao, Pong C. Yuen and Anil K. Jain. 
+"On the Reconstruction of Face Images from Deep Face Templates." 
+IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI) (2018)
+
+Alec Radford, Luke Metz and Soumith Chintala.
+"Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks."
+ICLR2016
+"""
+
 import mxnet as mx
 import numpy as np
 import matplotlib.pyplot as plt

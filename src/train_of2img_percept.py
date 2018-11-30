@@ -1,6 +1,11 @@
+"""References:
+Guangcan Mai, Kai Cao, Pong C. Yuen and Anil K. Jain. 
+"On the Reconstruction of Face Images from Deep Face Templates." 
+IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI) (2018)
+"""
+
 from symbol_nbnet import get_symbol
 from symbol_perceptual import descriptor_symbol
-from TensorBoardLogging import LogMetricsCallback
 from scipy.spatial.distance import cosine
 from util import load_args as la
 from util.util import *
@@ -14,8 +19,13 @@ import logging
 import time
 import pdb
 
-from collections import namedtuple
 from datetime import datetime
+
+# TensorBorad Flag
+UseTensorBoard = True
+
+if UseTensorBoard: 
+    from TensorBoardLogging import LogMetricsCallback
 
 file_path = os.path.dirname(os.path.abspath(__file__))
 VGGPATH = file_path+'/../model/vgg/vgg19.params'
@@ -32,15 +42,16 @@ def main(args):
     logger.addHandler(handler)
     size_p = 160
     
-    tb_folder = args.model_save_prefix+'_tblog/train'
-    try:
-        os.makedirs(tb_folder)
-    except OSError as exc:  # Python >2.5
-        if exc.errno == errno.EEXIST and os.path.isdir(tb_folder):
-            pass
-        else:
-            raise
-    batch_end_tb_callback = LogMetricsCallback(tb_folder,score_store=True)
+    if UseTensorBoard: 
+        tb_folder = args.model_save_prefix+'_tblog/train'
+        try:
+            os.makedirs(tb_folder)
+        except OSError as exc:  # Python >2.5
+            if exc.errno == errno.EEXIST and os.path.isdir(tb_folder):
+                pass
+            else:
+                raise
+        batch_end_tb_callback = LogMetricsCallback(tb_folder,score_store=True)
     
     #net,_ = make_dcgan_sym(64,64,3)
     #net = get_symbol(6)
@@ -106,7 +117,7 @@ def main(args):
     #eval_metrics.add(tpl_score)
     eval_metrics.add(pixel_mae)
 
-    for epoch in range(20):#train at most 200 epoches
+    for epoch in range(20):#train at most 20 epoches
         tic = time.time()
         num_batch = 0
 
@@ -158,7 +169,9 @@ def main(args):
                 nbatch=num_batch,
                 eval_metric=eval_metrics,
                 locals=locals())
-            batch_end_tb_callback(batch_end_params) 
+
+            if UseTensorBoard: 
+                batch_end_tb_callback(batch_end_params) 
             speedmeter(batch_end_params)
 
 

@@ -1,3 +1,14 @@
+# Adapted from https://github.com/Nicatio/Densenet/blob/master/mxnet/symbol_densenet.py
+
+"""References:
+Guangcan Mai, Kai Cao, Pong C. Yuen and Anil K. Jain. 
+"On the Reconstruction of Face Images from Deep Face Templates." 
+IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI) (2018)
+
+Gao Huang, Zhuang Liu, Laurens van der Maaten and Kilian Weinberger.
+"Densely Connected Convolutional Networks." CVPR2017
+"""
+
 import mxnet as mx
 import numpy as np
 from util.dcgan.symbol_dcgan160 import make_dcgan_sym
