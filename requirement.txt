@@ -1,8 +1,7 @@
 scipy
 numpy
-mxnet
-tensorflow
-threading
+mxnet-cu90
+tensorflow-gpu
 opencv
 matplotlib
 datetime
