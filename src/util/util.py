@@ -18,17 +18,18 @@ def feature_extractor(devs,model_path=facenet_path):
         with tf.Graph().as_default():
             gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.8,
                                             allow_growth=True,visible_device_list=str(dev))
-            with tf.Session(config=tf.ConfigProto(gpu_options=gpu_options)) as sess:
-                ss.append(sess)
-                sess.as_default()
-                # Load the model
-                facenet.load_model(model_path)
-                #pdb.set_trace()
-                
-                # Get input and output tensors
-                iph.append(tf.get_default_graph().get_tensor_by_name("input:0"))
-                ebds.append(tf.get_default_graph().get_tensor_by_name("embeddings:0"))
-                ptph.append(tf.get_default_graph().get_tensor_by_name("phase_train:0"))
+            sess = tf.Session(config=tf.ConfigProto(gpu_options=gpu_options))
+            #with tf.Session(config=tf.ConfigProto(gpu_options=gpu_options)) as sess:
+            ss.append(sess)
+            sess.as_default()
+            # Load the model
+            facenet.load_model(model_path)
+            #pdb.set_trace()
+            
+            # Get input and output tensors
+            iph.append(tf.get_default_graph().get_tensor_by_name("input:0"))
+            ebds.append(tf.get_default_graph().get_tensor_by_name("embeddings:0"))
+            ptph.append(tf.get_default_graph().get_tensor_by_name("phase_train:0"))
 
     def single_feature_extract (i,image,out_list=range(len(devs))):
         with ptph[i].graph.as_default():

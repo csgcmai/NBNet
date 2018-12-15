@@ -1,18 +1,25 @@
-usage: feature_reconstruct_demo.py [-h] [--gpus GPUS] [--prefix PREFIX]
-                                   [--epoch EPOCH] [--batch-size BATCH_SIZE]
-                                   [--input-image INPUT_IMAGE]
-                                   [--output-image OUTPUT_IMAGE]
+Clone the project from the github with 
 
-command for face reconstruction demo
+git clone git@github.com:csgcmai/NBNet.git
 
-optional arguments:
-  -h, --help            show this help message and exit
-  --gpus GPUS           the gpus will be used, e.g "0,1,2,3"
-  --prefix PREFIX       the prefix of the model to load
-  --epoch EPOCH         the epoch number to load
-  --batch-size BATCH_SIZE
-                        the batch size
-  --input-image INPUT_IMAGE
-  --output-image OUTPUT_IMAGE
+Install the required packages, the usage of the conda enviornment is recommended.
+Run the following commands
+
+conda create -n nbnet python=2.7 anaconda
+pip install --upgrade pip
+
+Piror to the next step, please refer https://www.tensorflow.org/install/gpu 
+and http://mxnet.io/install/index.html for installing the necessary packages 
+for installing the tensorflow and mxnet with GPU support
+
+
+cd NBNet
+pip install -r requirement.txt
+
+cd src
+python train_of2img_mae.py --gpus 0,1,2,3
+
+
+
 
 

@@ -1,0 +1,8 @@
+scipy
+numpy
+mxnet-cu90
+tensorflow-gpu
+opencv
+matplotlib
+datetime
+logging

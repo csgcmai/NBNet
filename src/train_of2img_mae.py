@@ -17,10 +17,11 @@ import logging
 import time
 import pdb
 
+mx.random.seed(100)
 from datetime import datetime
 
 # TensorBorad Flag
-UseTensorBoard = True
+UseTensorBoard = False
 
 if UseTensorBoard: 
     from TensorBoardLogging import LogMetricsCallback
@@ -50,6 +51,7 @@ def main(args):
     net = get_symbol(6, net_switch=args.net_switch)
     devs = mx.cpu() if args.gpus is None else [mx.gpu(int(i)) for i in args.gpus.split(',')]
     devsid = [int(i) for i in args.gpus.split(',')]
+    #pdb.set_trace()
     checkpoint = mx.callback.do_checkpoint(args.model_save_prefix)
     speedmeter = mx.callback.Speedometer(args.batch_size, 50)
     kv = mx.kvstore.create(args.kv_store)
