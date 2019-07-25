@@ -1,6 +1,7 @@
 Code for Paper:
 
-G. Mai, Kai Cao, P. C. Yuen and Anil K. Jain, On the Reconstruction of Face Images from Deep Face Templates, IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2019
+G. Mai, Kai Cao, P. C. Yuen and Anil K. Jain, "On the Reconstruction of Face Images from Deep Face Templates", 
+IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2019
 
 Please cite our paper if you find the code useful. 
 
